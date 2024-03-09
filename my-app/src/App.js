@@ -1,7 +1,9 @@
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import logo from './logo.svg';
 import './App.css';
 
-import HomeToBoardButton from './Button.js'; // Make sure to adjust the import path
+import HomeToBoardButton from './components/Button.js'; // Make sure to adjust the import path
 
 function App() {
   const handleClick = () => {
