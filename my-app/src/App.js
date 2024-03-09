@@ -15,10 +15,10 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
+        <h1>
           Welcome To The Community Board
-        </p>
-        <HomeToBoardButton onClick={handleClick} label="Click Me To Find Community Boards Near You" />
+        </h1>
+        <HomeToBoardButton onClick={handleClick} label="Click Me To Find Community Boards Near You" color= "#efbbf0" />
       </header>
     </div>
   );
