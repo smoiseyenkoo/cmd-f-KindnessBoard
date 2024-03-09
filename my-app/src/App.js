@@ -1,22 +1,22 @@
 import logo from './logo.svg';
 import './App.css';
 
+import HomeToBoardButton from './Button.js'; // Make sure to adjust the import path
+
 function App() {
+  const handleClick = () => {
+    console.log('CustomButton clicked!');
+    // You can perform any desired action here
+  };
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Welcome To The Community Board
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <HomeToBoardButton onClick={handleClick} label="Click Me To Find Community Boards Near You" />
       </header>
     </div>
   );
