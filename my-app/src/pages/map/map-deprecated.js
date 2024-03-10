@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import GenericButton from '../../components/GenericButton'
+import { useNavigate } from 'react-router-dom';
 
 function Map() {
     var defaultPosition = {
@@ -22,38 +24,41 @@ function Map() {
       defaultPosition = markerPosition[markerPosition.length - 1];
       console.log(defaultPosition);
     };
-    // console.log(markerPosition);
-    
-    // const click = (event) => {
-      
-      // setMarkerPosition({
-        //     lat: event.latLng.lat(),
-        //     lng: event.latLng.lng()
-        
-        // });
-        
-        // };
+    let navigate = useNavigate();
+
+    const handleClick = () => {
+      const second_last = markerPosition[markerPosition.length - 2];
+      const final_loc = [second_last.lat, second_last.lng];
+      console.log(final_loc);
+      navigate('/board'); 
+    };
      
 
 
     return (
-        <LoadScript
-      googleMapsApiKey="AIzaSyByWfjubELtGoOn1nMQ6e26d95180yn3-w">
-        <GoogleMap
-            mapContainerStyle={{ width: '100vw' , height: '100vh' }}
-            center={defaultPosition}
-            zoom={10}
-            onClick = {click}
-        >
-          {markerPosition.slice(-1).map((marker) => (
-        <Marker 
-          position={{ 
-            lat: marker.lat,
-            lng: marker.lng 
-          }} />
-    ))}
-      </GoogleMap>
-    </LoadScript>
+      <div>
+            <LoadScript
+          googleMapsApiKey="AIzaSyByWfjubELtGoOn1nMQ6e26d95180yn3-w">
+            <GoogleMap
+                mapContainerStyle={{ width: '100vw' , height: '100vh' }}
+                center={defaultPosition}
+                zoom={10}
+                onClick = {click}
+            >
+              {markerPosition.slice(-1).map((marker) => (
+            <Marker 
+              position={{ 
+                lat: marker.lat,
+                lng: marker.lng 
+              }} />
+        ))}
+          </GoogleMap>
+        </LoadScript>
+      <div className='map-button'>
+        
+      <GenericButton onClick={handleClick} label="click to find more boards near you" color="#efbbf0"/>
+      </div>
+        </div>
     );
 
 }

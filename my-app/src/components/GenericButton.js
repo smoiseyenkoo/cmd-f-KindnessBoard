@@ -7,7 +7,7 @@ const GenericButton = ({ onClick, label, color }) => {
           onClick={onClick}
           aria-label={label}
           variant="contained"
-          sx={{ backgroundColor: color, '&:hover': { backgroundColor: color, opacity: 0.9 } }}
+          sx={{ backgroundColor: color, '&:hover': { backgroundColor: color, opacity: 0.9, zIndex: 100 } }}
         >
           {label}
         </Button>
