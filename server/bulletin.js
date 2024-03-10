@@ -88,11 +88,11 @@ export async function getAllBoards() {
     try {
         mongoClient = await connectToCluster();
         const db = mongoClient.db(database);
-        const collection = db.collection("boards");
+        const collection = db.collection('all-boards');
 
         boards = await collection.find().toArray();
 
-        console.log(`Retrieving all boards: ${posts}`);
+        console.log(`Retrieving all boards: ${boards}`);
     } finally {
         await mongoClient.close();
     }
@@ -110,7 +110,7 @@ export async function createBoard(board) {
         mongoClient = await connectToCluster();
         const db = mongoClient.db(database);
         // add board to board collection:
-        const boards = db.collection("boards");
+        const boards = db.collection('all-boards');
         await boards.insertOne(board);
 
         // add new board:

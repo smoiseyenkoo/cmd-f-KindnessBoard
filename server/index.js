@@ -1,13 +1,12 @@
 import { config } from 'dotenv';
-import express, { json } from "express";
-import { boardExists, createBoard, getAllBoardPosts, getBoardLocation } from './bulletin.js';
+import express from "express";
+import { boardExists, createBoard, getAllBoards, getAllBoardPosts, getBoardLocation } from './bulletin.js';
 
 const app = express();
 app.use(express.json);
 const port = 8000;
 
 config();
-console.log(process.env.DB_URI);
 
 // get: sends true if the board already exists, false otherwise
 app.get("/:title", (req, res) => {
@@ -56,8 +55,6 @@ app.post("/:title/new-post", (req, res) => {
         res.send(success);
     });
 });
-
-
 
 app.listen(port, () => {
     console.log(`Server running on port ${port}`)
