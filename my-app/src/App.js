@@ -15,6 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/board" element={<Board />} />
+        <Route path="/map" element={<Map />} />
       </Routes>
     </BrowserRouter>
   );

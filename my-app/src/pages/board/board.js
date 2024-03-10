@@ -1,6 +1,6 @@
 import React from 'react';
 import boardimg from './Board.png'
-import BoardToMapButton from '../../components/IconButton';
+import BoardToMapButton from '../../components/IconButton.js';
 import { useNavigate } from 'react-router-dom';
 
 // import '../';
