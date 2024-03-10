@@ -1,12 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import boardimg from './Board.png'
 import BoardToMapButton from '../../components/IconButton.js';
 import StickyButton from '../../components/StickyButton.js';
 import { useState } from 'react';
 import Modal from '@mui/material/Modal';
 import BigSticky from '../bigSticky/bigSticky.js';
-
-
 
 import { useNavigate } from 'react-router-dom';
 import GenericButton from '../../components/GenericButton.js';
@@ -17,13 +15,30 @@ function Board() {
 
     const [open, setOpen] = useState(false);
 
-    const handleOpen = () => {
+    const [message, setMessage] = useState("");
+
+    const [currentId, setCurrentId] = useState();
+
+
+    useEffect(() => {
+        console.log(message);
+        setStickies(stickies.map((sticky) => {
+            if (sticky.id === currentId) { return { id: sticky.id, x: sticky.x, y: sticky.y, text: message } }
+            else { return sticky }
+        }))
+    }, [message]);
+
+    const handleOpen = (id) => {
         setOpen(true);
+        setCurrentId(id);
+        setMessage(stickies[id].text);
         console.log("called handle open")
     }
     const handleClose = () => {
         setOpen(false);
     }
+
+
 
 
     const addSticky = () => {
@@ -33,7 +48,9 @@ function Board() {
             id: stickies.length,
             x: Math.random() * maxX + 190,
             y: Math.random() * maxY + 100,
+            text: "..."
         };
+
         setStickies(stickies => [...stickies, newSticky]);
         console.log(stickies)
     };
@@ -44,9 +61,7 @@ function Board() {
         navigate('/map');
     };
 
-    const goToStickyNote = () => {
-        navigate('/bigSticky');
-    };
+
 
     return (
 
@@ -73,7 +88,7 @@ function Board() {
 
             {stickies.map((sticky) => (
                 // <StickyButton onClick={goToStickyNote} key={sticky.id} 
-                <StickyButton onClick={handleOpen}
+                <StickyButton onClick={() => handleOpen(sticky.id)}
                     style={{ left: sticky.x + 'px', top: sticky.y + 'px' }}
                 />
 
@@ -85,10 +100,10 @@ function Board() {
                 aria-describedby="modal-modal-description"
             >
                 {/* <Box sx={style}> */}
-                    <div>
-                        <BigSticky handleClose={handleClose}/>
-                        
-                    </div>
+                <div>
+                    <BigSticky handleClose={handleClose} setMessage={setMessage} message={message} />
+
+                </div>
                 {/* </Box> */}
             </Modal>
 
