@@ -18,7 +18,6 @@ function App() {
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Home />} />
-              {/* <Route path="/" element={<Board onShowOverlay={() => setShowOverlay(true)} />} /> */}
               <Route path="/board" element={<Board />} />
               <Route path="/map" element={<Map />} />
               <Route path="/bigSticky" element={<BigSticky />} />

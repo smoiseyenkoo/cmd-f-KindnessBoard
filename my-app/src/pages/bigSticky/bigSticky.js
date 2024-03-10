@@ -5,10 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { TextareaAutosize } from '@mui/base/TextareaAutosize';
 
-
-
-
-
 const BigSticky = ({ handleClose, setMessage, message }) => {
     const onChangeHandler = event => {setMessage(event.target.value)};
     return (
@@ -25,9 +21,6 @@ const BigSticky = ({ handleClose, setMessage, message }) => {
             zIndex: 1000,
         }}>
 
-            {/* <div style={{ position: 'absolute', top: 0, left: 0, margin: '10px' }}>
-        <BoardToMapButton onClick={handleClick} label="click to find more boards near you" color="#efbbf0" />
-        </div> */}
 
             <div style={{ position: 'absolute', top: 0, right: 0, margin: '10px' }}>
                 <GenericButton onClick={handleClose} label="X" color="#fac8f2" />
@@ -35,8 +28,6 @@ const BigSticky = ({ handleClose, setMessage, message }) => {
 
             <img src={YellowSticky} alt="Sticky Note" style={{ width: '50%', height: 'auto' }} />
             <p style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', color: 'black' }}>
-
-                {/* <TextareaAutosize aria-label="minimum height" minRows={3} placeholder="Minimum 3 rows" /> */}
 
                 <TextareaAutosize
                     maxRows={4}
