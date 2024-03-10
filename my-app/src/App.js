@@ -1,23 +1,17 @@
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import logo from './logo.svg';
-import Home from './pages/home/home.js'
+import Home from './pages/home/home.js';
+import Map from './pages/map/map.js';
+import Board from './pages/board/board.js';
 import './App.css';
 import React, { useEffect, useState } from 'react'
 
-import HomeToBoardButton from './components/Button.js'; // Make sure to adjust the import path
 
 function App() {
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="blogs" element={<Blogs />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <Home />
   );
 }
 
