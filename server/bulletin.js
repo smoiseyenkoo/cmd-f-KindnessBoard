@@ -21,6 +21,10 @@ export async function connectToCluster(uri) {
     await collection.insertOne(post);
  }
 
+export async function findAllPosts(collection) {
+    return collection.find().toArray();
+}
+
 export async function executeBulletinOperations(board, post) {
     const uri = process.env.DB_URI;
     let mongoClient;
@@ -29,10 +33,13 @@ export async function executeBulletinOperations(board, post) {
         mongoClient = await connectToCluster(uri);
         const db = mongoClient.db('boards');
         const collection = db.collection(board);
+        collection.createIndex( { "createdAt": 1 }, { expireAfterSeconds: 30 } )
 
         await createPost(collection, post);
 
+        console.log(await findAllPosts(collection));
     } finally {
         await mongoClient.close();
     }
  }
+

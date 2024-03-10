@@ -8,7 +8,8 @@ const port = 8000;
 config();
 console.log(process.env.DB_URI);
 
-const test = {name : "hannah",
+const test = {"createdAt": new Date(),
+    name : "hannah",
 text : "hello i am hannah",
 number : 1}
 
