@@ -16,12 +16,19 @@ const [boards, setBoards] = useState(null);
 const [requestBody, setRequestBody] = useState(null);
 const [titleValue, setTitleValue] = useState("");
 
-useEffect(() => {
-  fetch("http://localhost:8000/boards")
-  .then(response => response.json())
-  .then (temp => setBoards(temp))
-}, []);
-console.log("boards is " + JSON.stringify(boards));
+let addMarkers = () => {
+  useEffect(() => {
+    fetch("http://localhost:8000/boards")
+    .then(response => response.json())
+    .then (temp => setBoards(temp))
+  }, []);
+  console.log("boards is " + JSON.stringify(boards));
+  return boards.map(function(board) {
+    return <Marker position={{ lat: board.lat, lng: board.lon }} />;
+  });
+}
+
+
 
     const click = (e) => {
       setMarkerPosition((current) => [
@@ -68,10 +75,6 @@ console.log("boards is " + JSON.stringify(boards));
         </div>
       );
     };
-
-    let addMarkers = boards.map(function(board) {
-      return <Marker position={{ lat: board.lat, lng: board.lon }} />;
-    });
     
     return (
       <div>
