@@ -15,6 +15,8 @@ function Map() {
 }, {}]);
 
 const [boards, setBoards] = useState(null);
+const [requestBody, setRequestBody] = useState(null);
+
 useEffect(() => {
   fetch("http://localhost:8000/boards")
   .then(response => response.json())
@@ -42,7 +44,13 @@ console.log("boards is " + JSON.stringify(boards));
       const final_loc = [second_last.lat, second_last.lng];
       const req_body = {"lat": final_loc[0], "lng": final_loc[1]};
       console.log(final_loc);
-      const title = "test-title4";
+      setRequestBody(req_body);
+
+      // POP UP
+    };
+
+    const handleBoardSubmit = () => {
+      const title = "INSERT-TYPED-TITLE";
 
       fetch(`http://localhost:8000/new-board/${title}`, {
         method: 'POST',
@@ -54,7 +62,7 @@ console.log("boards is " + JSON.stringify(boards));
         console.log("Board created? " + JSON.stringify(response.body.created));
       });
       navigate('/board'); 
-    };
+    }
 
     console.log(markerPosition);
     
@@ -76,7 +84,7 @@ console.log("boards is " + JSON.stringify(boards));
           </GoogleMap>
       <div className='map-button'>
         
-      <GenericButton onClick={handleButtonClick} label="select this location" color="#efbbf0"/>
+      <GenericButton onClick={handleButtonClick} label="new board" color="#efbbf0"/>
       </div>
       {/* <div className="popup">
             <div className="popup-inner">
