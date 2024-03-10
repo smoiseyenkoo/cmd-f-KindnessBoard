@@ -14,9 +14,16 @@ function Board() {
     const [stickies, setStickies] = useState([]);
 
     const addSticky = () => {
-        const newSticky = { id: stickies.length + 1 };
+        // Assuming the board size is 800x600 for example
+        const maxX = 800 - 100; // Assuming sticky notes are 100px wide
+        const maxY = 600 - 100; // Assuming sticky notes are 100px tall
+        const newSticky = {
+          id: stickies.length,
+          x: Math.random() * maxX,
+          y: Math.random() * maxY,
+        };
         setStickies([...stickies, newSticky]);
-    }
+      };
 
     let navigate = useNavigate();
 
