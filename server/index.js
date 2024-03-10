@@ -57,7 +57,5 @@ app.post("/:title/new-post", (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`Server running on port ${port}`)
-    createBoard({title: "hii", lat: 1, lon: 2})
-    createPost("hello", {title: "title", body: "fhsjlkdnfjsdlknksm"})
+    console.log(`Server running on port ${port}`);
 });
