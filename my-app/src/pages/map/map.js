@@ -2,7 +2,7 @@ import React, { useState , useEffect} from 'react';
 import { GoogleMap, LoadScript, Marker, MarkerF, useJsApiLoader } from '@react-google-maps/api';
 import GenericButton from '../../components/GenericButton'
 import { useNavigate } from 'react-router-dom';
-
+import Popup from '../../components/Popup.js'
 
 function Map() {
     var defaultPosition = {
@@ -13,6 +13,8 @@ function Map() {
     const [markerPosition, setMarkerPosition] = useState([
       {
 }, {}]);
+
+const [open, setOpen] = useState(false);
 
 const [boards, setBoards] = useState(null);
 const [requestBody, setRequestBody] = useState(null);
@@ -38,6 +40,10 @@ console.log("boards is " + JSON.stringify(boards));
       console.log("Click position: " + defaultPosition);
     };
     let navigate = useNavigate();
+
+    const selectLocation = () => {
+      
+    }
 
     const handleButtonClick = () => {
       const second_last = markerPosition[markerPosition.length - 2];
@@ -86,6 +92,8 @@ console.log("boards is " + JSON.stringify(boards));
         
       <GenericButton onClick={handleButtonClick} label="new board" color="#efbbf0"/>
       </div>
+
+      
       {/* <div className="popup">
             <div className="popup-inner">
                 <h2>Input title for new board!</h2>
