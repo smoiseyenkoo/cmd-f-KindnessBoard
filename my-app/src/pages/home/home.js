@@ -1,11 +1,13 @@
 import React from 'react';
 import HomeToBoardButton from '../../components/Button';
-
+import { useNavigate } from 'react-router-dom';
 
 function Home() {
+
+    let navigate = useNavigate();
+
     const handleClick = () => {
-        console.log('CustomButton clicked!');
-        // You can perform any desired action here
+        navigate('/board'); // Navigate to the Board component
       };
     return(
 
