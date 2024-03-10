@@ -64,7 +64,7 @@ app.post("/:title/new-post", (req, res) => {
     const title = req.params.title;
     const post = req.body;
     createPost(title, post).then((success) => {
-        res.send(success);
+        res.send({retrieved: success});
     });
 });
 

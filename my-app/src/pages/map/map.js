@@ -20,7 +20,6 @@ useEffect(() => {
   .then(response => response.json())
   .then (temp => setBoards(temp))
 }, [])
-console.log(boards); // boards is now [lat], [long]
 console.log("boards is " + JSON.stringify(boards));
 
     const click = (e) => {
@@ -34,8 +33,7 @@ console.log("boards is " + JSON.stringify(boards));
       ]);
 
       defaultPosition = markerPosition[markerPosition.length - 1];
-      console.log("b");
-      console.log(defaultPosition);
+      console.log("Click position: " + defaultPosition);
     };
     let navigate = useNavigate();
 
@@ -53,7 +51,7 @@ console.log("boards is " + JSON.stringify(boards));
         },
         body: JSON.stringify(req_body),
       }).then((response) => {
-        console.log("Board created? " + JSON.stringify(response.body));
+        console.log("Board created? " + JSON.stringify(response.body.created));
       });
       navigate('/board'); 
     };
