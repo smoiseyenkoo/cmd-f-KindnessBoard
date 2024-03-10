@@ -61,23 +61,28 @@ function Board() {
         navigate('/map');
     };
 
-
+    const boardStyle = {
+        backgroundColor: '#c2dbec',
+        backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 100 100'%3E%3Cpath d='M50 30 Q25 0, 0 30 Q0 60, 50 100 Q100 60, 100 30 Q75 0, 50 30z' fill='%23ff69b4'%3E%3C/path%3E%3C/svg%3E")`,
+        backgroundRepeat: 'repeat',
+        minHeight: '50vh',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontSize: 'calc(10px + 2vmin)',
+        fontFamily: 'Cambria, Cochin, Georgia, Times, "Times New Roman", serif',
+        color: 'white',
+      };
 
     return (
 
-        <div style={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: '100vh',
-            backgroundColor: "#c2dbec",
-            position: 'relative',
-        }}>
+        <div style={boardStyle}>
 
             <h1 className='community-board'>
                 leave a nice message on the board :)
             </h1>
+
 
 
             <div style={{ position: 'absolute', top: 0, left: 0, margin: '10px' }}>
