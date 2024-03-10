@@ -10,15 +10,12 @@ function Map() {
         lng: -123.24547308038697
       };
     
-    const [markerPosition, setMarkerPosition] = useState([
-      {
-}, {}]);
+const [markerPosition, setMarkerPosition] = useState([defaultPosition, defaultPosition]);
 
 const [open, setOpen] = useState(false);
 
 const [boards, setBoards] = useState(null);
 const [requestBody, setRequestBody] = useState(null);
-const [boardTitle, setBoardTitle] = useState("");
 const [titleValue, setTitleValue] = useState("");
 
 useEffect(() => {
@@ -30,29 +27,20 @@ console.log("boards is " + JSON.stringify(boards));
 
     const click = (e) => {
       setMarkerPosition((current) => [
-        ...current,
+        current[1],
         {
           lat: e.latLng.lat(),
           lng: e.latLng.lng()
         }
         
       ]);
-
-      defaultPosition = markerPosition[markerPosition.length - 1];
-      console.log("Click position: " + defaultPosition);
+      console.log("Click position: " + markerPosition[0]);
     };
     let navigate = useNavigate();
 
-    const selectLocation = () => {
-      
-    }
-
     const handleButtonClick = () => {
-      const second_last = markerPosition[markerPosition.length - 2];
-      const final_loc = [second_last.lat, second_last.lng];
-      const req_body = {"lat": final_loc[0], "lng": final_loc[1]};
-      console.log(final_loc);
-      setRequestBody(req_body);
+      console.log(markerPosition[0]);
+      setRequestBody(markerPosition[0]);
       setOpen(true);
     };
 
@@ -82,8 +70,6 @@ console.log("boards is " + JSON.stringify(boards));
         </div>
       );
     };
-    console.log("TEST " + titleValue)
-    console.log(markerPosition);
     
     return (
       <div>
