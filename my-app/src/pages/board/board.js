@@ -1,12 +1,22 @@
 import React from 'react';
-
-function Map() {
-    return(
-        <p>
-            this is the board page
-        </p>
+import boardimg from './Board.png'
+// import '../';
+function Board() {
+    return (
+        <div style={{
+            display: 'flex', // Use flexbox to center content
+            justifyContent: 'center', // Center horizontally
+            alignItems: 'center', // Center vertically
+            height: '100vh', // Full height of the viewport
+            backgroundColor: '#efbbf0',
+            backgroundImage: `url(${boardimg})`,
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center', // Center the background image
+            backgroundSize: 'contain', // Change to 'cover' if you want it to fully cover the div
+        }}>
+            <p>this is the board page</p>
+        </div>
     );
-
 }
 
-export default Map;
+export default Board;
