@@ -48,12 +48,14 @@ app.get("/boards", (req, res) => {
 
 // post: creates a board, given a board with that title doesn't already exist
 app.post("/new-board/:title", (req, res) => {
+    console.log(JSON.stringify(req.body));
     const title = req.params.title;
-    const body = req.body;
-    const board = { title: title, lat: body.lat, lon: body.lng };
+    const lat = req.body.lat;
+    const lon = req.body.lng;
+    const board = { title: title, lat: lat, lon: lon };
     console.log(`Obtained new board info: ${board}`);
     createBoard(board).then((success) => {
-        res.send(success);
+        res.json({created: success});
     });
 });
 
