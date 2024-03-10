@@ -3,7 +3,7 @@
 }
 
 .community-board {
-
+  margin-top: 50px; /* Adjust the value as needed */
   font-family: "Modak", system-ui;
   font-weight: 400;
   font-style: normal;
@@ -110,3 +110,4 @@
 h1 {
   font-family: Arial Narrow Bold;
 }
+
