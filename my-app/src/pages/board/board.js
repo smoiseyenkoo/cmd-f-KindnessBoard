@@ -30,6 +30,10 @@ function Board() {
         navigate('/map'); 
       };
 
+    const goToStickyNote = () => {
+        navigate('/bigStick');
+      };
+
     return (
 
     <div style={{
@@ -50,7 +54,7 @@ function Board() {
         </div>
 
             {stickies.map((sticky) => (
-                <StickyButton key={sticky.id} 
+                <StickyButton onClick={goToStickyNote} key={sticky.id} 
                 style={{ left: sticky.x + 'px', top: sticky.y + 'px' }}
                 />
          ))}
