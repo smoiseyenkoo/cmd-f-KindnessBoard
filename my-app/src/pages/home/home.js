@@ -17,7 +17,7 @@ function Home() {
             <p>
             Welcome To The Community Board
             </p>
-            <HomeToBoardButton onClick={handleClick} label="Click Me To Find Community Boards Near You" color="#efbbf0" />
+            <HomeToBoardButton onClick={handleClick} label="Leave a kind message for others <3" color="#efbbf0" />
         </header>
     );
 }

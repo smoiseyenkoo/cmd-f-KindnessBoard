@@ -71,11 +71,12 @@ function Board() {
             justifyContent: 'center',
             alignItems: 'center',
             height: '100vh',
-            backgroundColor: '#c26b2d',
+            backgroundColor: "#c2dbec",
             position: 'relative',
         }}>
-            <h1>
-                Your Community Board
+
+            <h1 className='community-board'>
+                leave a nice message on the board :)
             </h1>
 
 
@@ -115,8 +116,8 @@ function Board() {
                 objectFit: 'contain',
             }} />
             <div style={{
-                position: 'absolute', // Overlay the text
-                color: 'white', // Ensures text is visible
+                position: 'absolute', 
+                color: 'white',
                 fontSize: '24px',
             }}>
             </div>
