@@ -1,6 +1,6 @@
 // Button.js
 import React from 'react';
-// import Button from '@mui/material/Button';
+import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import cloud from './cloud.png'
 
@@ -11,5 +11,7 @@ const HomeToBoardButton = ({ onClick, label }) => {
     </IconButton>
   );
 };
+
+
 
 export default HomeToBoardButton;
