@@ -1,9 +1,16 @@
 import { config } from 'dotenv';
 import express, { json } from 'express';
 import { boardExists, createBoard, getAllBoards, getAllBoardPosts, getBoardLocation, createPost } from './bulletin.js';
+import cors from 'cors';
 
 const app = express();
 const port = 8000;
+app.use(cors());
+app.use(
+    cors({
+        origin: ["http://localhost:3000/", "http://localhost:8000/"]
+    })
+)
 
 config();
 
@@ -41,7 +48,7 @@ app.get("/boards", (req, res) => {
 // post: creates a board, given a board with that title doesn't already exist
 app.post("/new-board/:title", (req, res) => {
     const title = req.params.title;
-    const board = { title: title, lat: req.body.lat, lon: req.body.lng };
+    const board = { title: title, lat: req.body['lat'], lon: req.body['lng'] };
     createBoard(board).then((success) => {
         res.send(success);
     });

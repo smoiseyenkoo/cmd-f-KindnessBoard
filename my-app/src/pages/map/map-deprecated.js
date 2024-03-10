@@ -33,6 +33,28 @@ function Map() {
       const second_last = markerPosition[markerPosition.length - 2];
       const final_loc = [second_last.lat, second_last.lng];
       console.log(final_loc);
+      //const title = "test-title"
+
+      const request = new Request(`http://localhost:8000/new-board/test-title`, {
+        method: "POST",
+        body: second_last,
+      });
+      fetch(request).then((response) => {
+        console.log(JSON.stringify(response.data))
+      });
+
+      
+      // const addMarkers = async (location) => {
+      //   fetch(`http://localhost:8000/new-board/${title}`, {
+      //     method: 'POST',
+      //     body: JSON.stringify(second_last)
+      //   })
+      //   .then(resopnse => response.json())
+      //   .then(temp => {setMarkerPosition(temp);})
+      // }
+
+      // addMarkers(second_last);
+
       navigate('/board'); 
     };
 
