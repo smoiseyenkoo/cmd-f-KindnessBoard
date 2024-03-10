@@ -2,11 +2,21 @@ import React from 'react';
 import boardimg from './Board.png'
 import BoardToMapButton from '../../components/IconButton.js';
 import Stickies from '../../components/Stickies.js'; // Adjust the import path as necessary
+import { useState } from 'react';
+
 
 import { useNavigate } from 'react-router-dom';
+import GenericButton from '../../components/GenericButton.js';
 
 // import '../';
 function Board() {
+
+    const [stickies, setStickies] = useState([]);
+
+    const addSticky = () => {
+        const newSticky = { id: stickies.length + 1 };
+        setStickies([...stickies, newSticky]);
+    }
 
     let navigate = useNavigate();
 
@@ -26,6 +36,12 @@ function Board() {
             position: 'relative', // Needed for absolute positioning of children
         }}>
             <BoardToMapButton onClick={handleClick} label="click to find more boards near you" color="#efbbf0" />
+            <GenericButton onClick={addSticky} label="click to add a new sticky" color="#fac8f2" />
+
+            {stickies.map((sticky) => (
+                <Stickies key={sticky.id} /> // Assuming each sticky is identical for simplicity
+         ))}
+
             
 
             <img src={boardimg} alt="Board" style={{
