@@ -1,6 +1,6 @@
 import { config } from 'dotenv';
 import express, { json } from 'express';
-import { boardExists, createBoard, getAllBoards, getAllBoardPosts, getBoardLocation } from './bulletin.js';
+import { boardExists, createBoard, getAllBoards, getAllBoardPosts, getBoardLocation, createPost } from './bulletin.js';
 
 const app = express();
 const port = 8000;
@@ -58,4 +58,6 @@ app.post("/:title/new-post", (req, res) => {
 
 app.listen(port, () => {
     console.log(`Server running on port ${port}`)
+    createBoard({title: "hii", lat: 1, lon: 2})
+    createPost("hello", {title: "title", body: "fhsjlkdnfjsdlknksm"})
 });
