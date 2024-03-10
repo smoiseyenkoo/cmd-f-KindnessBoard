@@ -15,13 +15,23 @@ export async function connectToCluster(uri) {
         process.exit();
     }
  }
+ 
+ // post = json file of all things
+ export async function createPost(collection, post) {
+    await collection.insertOne(post);
+ }
 
-export async function executeBulletinOperations() {
+export async function executeBulletinOperations(board, post) {
     const uri = process.env.DB_URI;
     let mongoClient;
  
     try {
         mongoClient = await connectToCluster(uri);
+        const db = mongoClient.db('boards');
+        const collection = db.collection(board);
+
+        await createPost(collection, post);
+
     } finally {
         await mongoClient.close();
     }
