@@ -1,7 +1,7 @@
 import React from 'react';
 import boardimg from './Board.png'
 import BoardToMapButton from '../../components/IconButton.js';
-import Stickies from '../../components/Stickies.js'; 
+import StickyButton from '../../components/StickyButton.js'; 
 import { useState } from 'react';
 
 
@@ -14,7 +14,7 @@ function Board() {
 
     const addSticky = () => {
         const maxX = 800; 
-        const maxY = 400; 
+        const maxY = 600; 
         const newSticky = {
           id: stickies.length,
           x: Math.random() * maxX + 190,
@@ -50,7 +50,7 @@ function Board() {
         </div>
 
             {stickies.map((sticky) => (
-                <Stickies key={sticky.id} 
+                <StickyButton key={sticky.id} 
                 style={{ left: sticky.x + 'px', top: sticky.y + 'px' }}
                 />
          ))}
