@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@mui/icons-material": "^5.15.12",
     "@react-google-maps/api": "^2.19.3",
     "dotenv": "^16.4.5"
   }
