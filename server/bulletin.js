@@ -4,7 +4,7 @@ const uri = process.env.DB_URI;
 const database = 'boards';
 const ttl = 30; // the number of seconds a post lasts on a board
 
-export async function connectToCluster() {
+async function connectToCluster() {
     let mongoClient;
  
     try {
