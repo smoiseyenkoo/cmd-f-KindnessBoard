@@ -8,7 +8,7 @@ const port = 8000;
 config();
 
 // get: sends true if the board already exists, false otherwise
-app.get("/:title", (req, res) => {
+app.get("/check-board/:title", (req, res) => {
     const title = req.params.title;
     boardExists(title).then((isBoard) => {
         res.send(isBoard);
@@ -42,7 +42,7 @@ app.get("/boards", (req, res) => {
 app.post("/new-board/:title", (req, res) => {
     const title = req.params.title;
     const board = { title: title, lat: req.body.lat, lon: req.body.lng };
-    createBoard(title).then((success) => {
+    createBoard(board).then((success) => {
         res.send(success);
     });
 });

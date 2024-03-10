@@ -44,10 +44,13 @@ export async function boardExists(title) {
 }
 
 // returns the location of a given board, an object with lon and lat
-// REQUIRES: the given board already exists!
 export async function getBoardLocation(title) {
     let mongoClient;
     let boardLocation = {};
+    const checkBoard = await boardExists(title);
+    if (!checkBoard) {
+        return boardLocation;
+    }
  
     try {
         mongoClient = await connectToCluster();
@@ -65,6 +68,10 @@ export async function getBoardLocation(title) {
 export async function getAllBoardPosts(title) {
     let mongoClient;
     let posts = [];
+    const checkBoard = await boardExists(title);
+    if (!checkBoard) {
+        return posts;
+    }
  
     try {
         mongoClient = await connectToCluster();
@@ -100,11 +107,14 @@ export async function getAllBoards() {
 }
 
 // creates a board given a json object holding title, lat, and lon
-// returns true on success
+// returns true on success, false if board already exists
 export async function createBoard(board) {
     let mongoClient;
     const title = board.title;
-    const location = { _id: "location", lat: board.lat, lon: board.lon };
+    const checkBoard = await boardExists(title);
+    if (checkBoard) {
+        return false;
+    }
  
     try {
         mongoClient = await connectToCluster();
@@ -116,7 +126,6 @@ export async function createBoard(board) {
         // add new board:
         const collection = db.collection(title);
         await collection.createIndex( { "createdAt": 1 }, { expireAfterSeconds: ttl } );
-        await collection.insertOne(location);
 
         console.log(`Created new board: ${title}`);
     } finally {
@@ -125,9 +134,13 @@ export async function createBoard(board) {
     return true;
 }
 
-// creates a post on a given board, where post is a json object
-// returns true on success
+// creates a post on a given board (title), where post is a json object
+// returns true on success, false if board doesn't exist
 export async function createPost(title, post) {
+    const checkBoard = await boardExists(title);
+    if (!checkBoard) {
+        return false;
+    }
     let mongoClient;
  
     try {
