@@ -1,8 +1,6 @@
 import React from 'react';
 import GenericButton from '../../components/GenericButton.js';
 import YellowSticky from '../../components/yellowSticky.png'
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
 import { TextareaAutosize } from '@mui/base/TextareaAutosize';
 
 const BigSticky = ({ handleClose, setMessage, message }) => {

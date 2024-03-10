@@ -43,11 +43,11 @@ function Board() {
 
     const addSticky = () => {
         const maxX = 800;
-        const maxY = 500;
+        const maxY = 450;
         const newSticky = {
             id: stickies.length,
             x: Math.random() * maxX + 190,
-            y: Math.random() * maxY + 150,
+            y: Math.random() * maxY + 200,
             text: "..."
         };
 
