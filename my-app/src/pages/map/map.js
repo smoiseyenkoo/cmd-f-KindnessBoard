@@ -18,6 +18,8 @@ const [open, setOpen] = useState(false);
 
 const [boards, setBoards] = useState(null);
 const [requestBody, setRequestBody] = useState(null);
+const [boardTitle, setBoardTitle] = useState("");
+const [titleValue, setTitleValue] = useState("");
 
 useEffect(() => {
   fetch("http://localhost:8000/boards")
@@ -51,25 +53,36 @@ console.log("boards is " + JSON.stringify(boards));
       const req_body = {"lat": final_loc[0], "lng": final_loc[1]};
       console.log(final_loc);
       setRequestBody(req_body);
-
-      // POP UP
+      setOpen(true);
     };
 
     const handleBoardSubmit = () => {
-      const title = "INSERT-TYPED-TITLE";
-
-      fetch(`http://localhost:8000/new-board/${title}`, {
+      console.log(titleValue);
+      fetch(`http://localhost:8000/new-board/${titleValue}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(req_body),
+        body: JSON.stringify(requestBody),
       }).then((response) => {
         console.log("Board created? " + JSON.stringify(response.body.created));
       });
       navigate('/board'); 
     }
 
+    const Popup = ({ text, closePopup }) => {
+      return (
+        <div className="popup-container">
+         <div className="popup-body">
+          <h1>{text}</h1>
+          <input type='text' onBlur={(event) => {setTitleValue(event.target.value)}}></input>
+          <button type='submit' onClick={handleBoardSubmit}>Submit</button>
+          <button onClick={closePopup}>Close X</button>
+         </div>
+        </div>
+      );
+    };
+    console.log("TEST " + titleValue)
     console.log(markerPosition);
     
     return (
@@ -92,6 +105,9 @@ console.log("boards is " + JSON.stringify(boards));
         
       <GenericButton onClick={handleButtonClick} label="new board" color="#efbbf0"/>
       </div>
+      <div>
+{open ? <Popup text="Input title!" closePopup={() => setOpen(false)}/> : null}
+   </div>
 
       
       {/* <div className="popup">
