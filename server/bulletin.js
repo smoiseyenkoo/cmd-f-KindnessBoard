@@ -28,7 +28,6 @@ export async function boardExists(title) {
     try {
         mongoClient = await connectToCluster();
         const db = mongoClient.db(database);
-        //boardExists = db.listCollections().includes(title);
         const collections = await db.listCollections().toArray();
         const collectionNames = collections.map(collection => collection.name);
         boardExists = collectionNames.includes(title);

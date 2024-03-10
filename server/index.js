@@ -1,6 +1,6 @@
 import { config } from 'dotenv';
 import express, { json } from "express";
-import { boardExists } from './bulletin.js';
+import { boardExists, getAllBoardPosts, getBoardLocation } from './bulletin.js';
 
 const app = express();
 const port = 8000;
@@ -17,8 +17,20 @@ app.get("/isBoard/:title", (req, res) => {
 });
 
 // get: returns the location of an existing board
+app.get("/:title/location", (req, res) => {
+    const title = req.params.title;
+    getBoardLocation(title).then((location) => {
+        res.json(location);
+    });
+});
 
 // get: returns all posts on an existing board
+app.get("/:title/posts", (req, res) => {
+    const title = req.params.title;
+    getAllBoardPosts(title).then((posts) => {
+        res.json(posts);
+    });
+});
 
 // post: creates a board, given a board with that title doesn't already exist
 
