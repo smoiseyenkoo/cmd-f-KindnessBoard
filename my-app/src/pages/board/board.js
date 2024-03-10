@@ -8,7 +8,7 @@ function Board() {
             justifyContent: 'center', // Center horizontally
             alignItems: 'center', // Center vertically
             height: '100vh', // Full height of the viewport
-            backgroundColor: '#efbbf0',
+            backgroundColor: '#c26b2d',
             backgroundImage: `url(${boardimg})`,
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'center', // Center the background image
