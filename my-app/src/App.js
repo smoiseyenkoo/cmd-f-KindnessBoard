@@ -1,5 +1,5 @@
 import Home from './pages/home/home.js';
-import Map from './pages/map/map.js';
+import Map from './pages/map/map-deprecated.js';
 import Board from './pages/board/board.js';
 import './App.css';
 import React, { useEffect, useState } from 'react'
