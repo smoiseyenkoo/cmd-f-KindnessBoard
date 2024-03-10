@@ -15,7 +15,7 @@ function Home() {
         <header className="App-header">
 
             <p>
-            Welcome To The Community Board
+            Leave a kind message for others!
             </p>
             <HomeToBoardButton onClick={handleClick} label="Leave a kind message for others <3" color="#efbbf0" />
         </header>
