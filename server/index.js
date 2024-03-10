@@ -1,9 +1,8 @@
 import { config } from 'dotenv';
-import express from "express";
+import express, { json } from 'express';
 import { boardExists, createBoard, getAllBoards, getAllBoardPosts, getBoardLocation } from './bulletin.js';
 
 const app = express();
-app.use(express.json);
 const port = 8000;
 
 config();
