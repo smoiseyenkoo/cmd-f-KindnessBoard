@@ -80,6 +80,25 @@ export async function getAllBoardPosts(title) {
     return posts;
 }
 
+// returns an array of all boards (title, lat, lon)
+export async function getAllBoards() {
+    let mongoClient;
+    let boards = [];
+ 
+    try {
+        mongoClient = await connectToCluster();
+        const db = mongoClient.db(database);
+        const collection = db.collection("boards");
+
+        boards = await collection.find().toArray();
+
+        console.log(`Retrieving all boards: ${posts}`);
+    } finally {
+        await mongoClient.close();
+    }
+    return boards;
+}
+
 // creates a board given a json object holding title, lat, and lon
 // returns true on success
 export async function createBoard(board) {
@@ -90,6 +109,11 @@ export async function createBoard(board) {
     try {
         mongoClient = await connectToCluster();
         const db = mongoClient.db(database);
+        // add board to board collection:
+        const boards = db.collection("boards");
+        await boards.insertOne(board);
+
+        // add new board:
         const collection = db.collection(title);
         await collection.createIndex( { "createdAt": 1 }, { expireAfterSeconds: ttl } );
         await collection.insertOne(location);
