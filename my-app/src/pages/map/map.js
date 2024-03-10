@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
 import { GoogleMap, LoadScript, Marker, MarkerF, useJsApiLoader } from '@react-google-maps/api';
 import GenericButton from '../../components/GenericButton'
 import { useNavigate } from 'react-router-dom';
@@ -13,6 +13,15 @@ function Map() {
     const [markerPosition, setMarkerPosition] = useState([
       {
 }, {}]);
+
+const [boards, setBoards] = useState(null);
+useEffect(() => {
+  fetch("http://localhost:8000/boards")
+  .then(response => response.json())
+  .then (temp => setBoards(temp))
+}, [])
+console.log(boards); // boards is now [lat], [long]
+console.log("boards is " + JSON.stringify(boards));
 
     const click = (e) => {
       setMarkerPosition((current) => [
@@ -30,13 +39,22 @@ function Map() {
     };
     let navigate = useNavigate();
 
-    const handleClick = () => {
-      navigate('/board'); 
-    };
-
-    const bro = () => {
+    const handleButtonClick = () => {
       const second_last = markerPosition[markerPosition.length - 2];
       const final_loc = [second_last.lat, second_last.lng];
+      const req_body = {"lat": final_loc[0], "lng": final_loc[1]};
+      console.log(final_loc);
+      const title = "test-title4";
+
+      fetch(`http://localhost:8000/new-board/${title}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(req_body),
+      }).then((response) => {
+        console.log("Board created? " + JSON.stringify(response.body));
+      });
       navigate('/board'); 
     };
 
@@ -60,26 +78,20 @@ function Map() {
           </GoogleMap>
       <div className='map-button'>
         
-      <GenericButton onClick={handleClick} label="click to go back to previous board" color="#efbbf0"/>
+      <GenericButton onClick={handleButtonClick} label="select this location" color="#efbbf0"/>
       </div>
-      <div className='bro-button'>
-      <GenericButton onClick={bro} label="confirm location"/>
-      </div>
-      <div className="popup">
+      {/* <div className="popup">
             <div className="popup-inner">
-                <h2>Login</h2>
-                <form onSubmit={bro}>
+                <h2>Input title for new board!</h2>
+                <form onSubmit={}>
                     <label>
-                        Username:
-                        <input type="text" value={""} 
-                        // onChange={e => setUsername(e.target.value)} />
-                        />
+                        <input type="text"/>
                     </label>
-                    <button type="submit">Login</button>
+                    <button type="submit">Enter</button>
                 </form>
                 {/* <button onClick={props.toggle}>Close</button> */}
-            </div>
-      </div>
+            {/* </div> */}
+      {/* </div> */}
         </div>
     );
 
