@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 
 function Map() {
-    const position = {
+    var defaultPosition = {
         lat: 49.26247856768246,
         lng: -123.24547308038697
       };
@@ -18,6 +18,9 @@ function Map() {
         }
         
       ]);
+
+      defaultPosition = markerPosition[markerPosition.length - 1];
+      console.log(defaultPosition);
     };
     // console.log(markerPosition);
     
@@ -30,8 +33,7 @@ function Map() {
         // });
         
         // };
-        const actualMarker = markerPosition[markerPosition.length - 1];
-        console.log(actualMarker);
+     
 
 
     return (
@@ -39,7 +41,7 @@ function Map() {
       googleMapsApiKey="AIzaSyByWfjubELtGoOn1nMQ6e26d95180yn3-w">
         <GoogleMap
             mapContainerStyle={{ width: '100vw' , height: '100vh' }}
-            center={actualMarker}
+            center={defaultPosition}
             zoom={10}
             onClick = {click}
         >
