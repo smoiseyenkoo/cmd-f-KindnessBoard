@@ -2,7 +2,9 @@ import React from 'react';
 
 function Map() {
     return(
-        <p></p>
+        <p>
+            this is the board page
+        </p>
     );
 
 }
