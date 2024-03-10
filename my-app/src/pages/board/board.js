@@ -1,8 +1,11 @@
 import React from 'react';
 import boardimg from './Board.png'
 import BoardToMapButton from '../../components/IconButton.js';
-import StickyButton from '../../components/StickyButton.js'; 
+import StickyButton from '../../components/StickyButton.js';
 import { useState } from 'react';
+import Modal from '@mui/material/Modal';
+import BigSticky from '../bigSticky/bigSticky.js';
+
 
 
 import { useNavigate } from 'react-router-dom';
@@ -12,64 +15,94 @@ function Board() {
 
     const [stickies, setStickies] = useState([]);
 
+    const [open, setOpen] = useState(false);
+
+    const handleOpen = () => {
+        setOpen(true);
+        console.log("called handle open")
+    }
+    const handleClose = () => {
+        setOpen(false);
+    }
+
+
     const addSticky = () => {
-        const maxX = 800; 
-        const maxY = 600; 
+        const maxX = 800;
+        const maxY = 600;
         const newSticky = {
-          id: stickies.length,
-          x: Math.random() * maxX + 190,
-          y: Math.random() * maxY + 100,
+            id: stickies.length,
+            x: Math.random() * maxX + 190,
+            y: Math.random() * maxY + 100,
         };
-        setStickies(stickies => [...stickies, newSticky]); 
+        setStickies(stickies => [...stickies, newSticky]);
         console.log(stickies)
-      };
+    };
 
     let navigate = useNavigate();
 
     const handleClick = () => {
-        navigate('/map'); 
-      };
+        navigate('/map');
+    };
 
     const goToStickyNote = () => {
-        navigate('/bigStick');
-      };
+        navigate('/bigSticky');
+    };
 
     return (
 
-    <div style={{
+        <div style={{
             display: 'flex',
-            flexDirection: 'column', 
-            justifyContent: 'center', 
+            flexDirection: 'column',
+            justifyContent: 'center',
             alignItems: 'center',
             height: '100vh',
             backgroundColor: '#c26b2d',
-            position: 'relative', 
+            position: 'relative',
         }}>
+            <h1>
+                Your Community Board
+            </h1>
 
-        <div style={{ position: 'absolute', top: 0, left: 0, margin: '10px' }}>
-        <BoardToMapButton onClick={handleClick} label="click to find more boards near you" color="#efbbf0" />
-        </div>
-        <div style={{ position: 'absolute', top: 0, right: 0, margin: '10px' }}>
-        <GenericButton onClick={addSticky} label="click to add a new sticky" color="#fac8f2" />
-        </div>
+
+            <div style={{ position: 'absolute', top: 0, left: 0, margin: '10px' }}>
+                <BoardToMapButton onClick={handleClick} label="click to find more boards near you" color="#efbbf0" />
+            </div>
+            <div style={{ position: 'absolute', top: 0, right: 0, margin: '10px' }}>
+                <GenericButton onClick={addSticky} label="click to add a new sticky" color="#fac8f2" />
+            </div>
 
             {stickies.map((sticky) => (
-                <StickyButton onClick={goToStickyNote} key={sticky.id} 
-                style={{ left: sticky.x + 'px', top: sticky.y + 'px' }}
+                // <StickyButton onClick={goToStickyNote} key={sticky.id} 
+                <StickyButton onClick={handleOpen}
+                    style={{ left: sticky.x + 'px', top: sticky.y + 'px' }}
                 />
-         ))}
 
-            
+            ))}
+            <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                {/* <Box sx={style}> */}
+                    <div>
+                        <BigSticky handleClose={handleClose}/>
+                        
+                    </div>
+                {/* </Box> */}
+            </Modal>
+
+
 
             <img src={boardimg} alt="Board" style={{
-                maxWidth: '80%', 
-                maxHeight: '80vh', 
-                objectFit: 'contain', 
+                maxWidth: '80%',
+                maxHeight: '80vh',
+                objectFit: 'contain',
             }} />
             <div style={{
                 position: 'absolute', // Overlay the text
                 color: 'white', // Ensures text is visible
-                fontSize: '24px', 
+                fontSize: '24px',
             }}>
             </div>
         </div>
