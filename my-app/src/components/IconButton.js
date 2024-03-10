@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from '@mui/material/Button';
-import LocationOnIcon from '@mui/icons-material/LocationOn'; // If you're using an icon
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 const BoardToMapButton = ({ onClick, label, color }) => {
   return (
