@@ -11,6 +11,7 @@ app.use(
         origin: ["http://localhost:3000/", "http://localhost:8000/"]
     })
 )
+app.use(express.json());
 
 config();
 
@@ -48,7 +49,9 @@ app.get("/boards", (req, res) => {
 // post: creates a board, given a board with that title doesn't already exist
 app.post("/new-board/:title", (req, res) => {
     const title = req.params.title;
-    const board = { title: title, lat: req.body['lat'], lon: req.body['lng'] };
+    const body = JSON.stringify(req.body);
+    console.log(`request body: ${body}`);
+    const board = { title: title, lat: body.lat, lon: body.lng };
     createBoard(board).then((success) => {
         res.send(success);
     });

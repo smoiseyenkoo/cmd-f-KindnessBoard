@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { GoogleMap, LoadScript, Marker, useJsApiLoader } from '@react-google-maps/api';
 import GenericButton from '../../components/GenericButton'
 import { useNavigate } from 'react-router-dom';
@@ -13,6 +13,15 @@ function Map() {
       lat: 0,
       lng: 0
     }]);
+
+    const [boards, setBoards] = useState(null);
+    useEffect(() => {
+      fetch("http://localhost:8000/boards")
+      .then(response => response.json())
+      .then (temp => setBoards(temp))
+    }, [])
+    console.log(boards); // boards is now [lat], [long]
+    console.log("boards is " + JSON.stringify(boards));
 
     const click = (e) => {
       setMarkerPosition((current) => [
@@ -32,15 +41,20 @@ function Map() {
     const handleClick = () => {
       const second_last = markerPosition[markerPosition.length - 2];
       const final_loc = [second_last.lat, second_last.lng];
+      const body = {lat: final_loc[0], lng: final_loc[1]}
       console.log(final_loc);
       //const title = "test-title"
 
-      const request = new Request(`http://localhost:8000/new-board/test-title`, {
-        method: "POST",
-        body: second_last,
-      });
-      fetch(request).then((response) => {
-        console.log(JSON.stringify(response.data))
+      //console.log(JSON.stringify(body) + "this is second last")
+      fetch(`http://localhost:8000/new-board/test-title`, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body), //undefined
+      }).then((response) => {
+        console.log("here it is: " + JSON.stringify(response));
       });
 
       
