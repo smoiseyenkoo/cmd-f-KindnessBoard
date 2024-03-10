@@ -7,7 +7,7 @@ function Home() {
     let navigate = useNavigate();
 
     const handleClick = () => {
-        navigate('/board'); // Navigate to the Board component
+        navigate('/board'); 
       };
     return(
 
