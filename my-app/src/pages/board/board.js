@@ -1,10 +1,7 @@
 import React from 'react';
 import boardimg from './Board.png'
-import BoardToMapButton from '../../components/RectButton';
-
-
+import BoardToMapButton from '../../components/IconButton.js';
 import { useNavigate } from 'react-router-dom';
-
 
 // import '../';
 function Board() {
@@ -12,11 +9,12 @@ function Board() {
     let navigate = useNavigate();
 
     const handleClick = () => {
-        navigate('/map'); // Navigate to the Map component
+        navigate('/map'); // Navigate to the map component
       };
 
     return (
-<div style={{
+
+    <div style={{
             display: 'flex',
             flexDirection: 'column', // Stack children vertically
             justifyContent: 'center', // Center children vertically
@@ -25,7 +23,7 @@ function Board() {
             backgroundColor: '#c26b2d',
             position: 'relative', // Needed for absolute positioning of children
         }}>
-            <BoardToMapButton onClick={handleClick} label="find more boards near you" color="#f0adcf" />
+            <BoardToMapButton onClick={handleClick} label="click to find more boards near you" color="#efbbf0" />
 
             <img src={boardimg} alt="Board" style={{
                 maxWidth: '80%', // Limits the image size, adjust as needed
