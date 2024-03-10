@@ -13,12 +13,12 @@ function Board() {
     const [stickies, setStickies] = useState([]);
 
     const addSticky = () => {
-        const maxX = 800 - 100; 
-        const maxY = 600 - 100; 
+        const maxX = 800; 
+        const maxY = 400; 
         const newSticky = {
           id: stickies.length,
-          x: Math.random() * maxX,
-          y: Math.random() * maxY,
+          x: Math.random() * maxX + 190,
+          y: Math.random() * maxY + 100,
         };
         setStickies(stickies => [...stickies, newSticky]); 
         console.log(stickies)
