@@ -4,13 +4,13 @@ import YellowSticky from '../../components/yellowSticky.png'
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { TextareaAutosize } from '@mui/base/TextareaAutosize';
-// import { Textarea } from '@mui/base/TextareaAutosize';
 
 
 
 
 
-const BigSticky = ({ handleClose }) => {
+const BigSticky = ({ handleClose, setMessage, message }) => {
+    const onChangeHandler = event => {setMessage(event.target.value)};
     return (
         <div style={{
             position: 'fixed',
@@ -42,7 +42,10 @@ const BigSticky = ({ handleClose }) => {
                     maxRows={4}
                     aria-label="maximum height"
                     placeholder="Maximum 4 rows"
-                    defaultValue="Type!"
+                    onChange={onChangeHandler}
+                    value={message}
+
+
                 />
             </p>
         </div>
