@@ -1,6 +1,8 @@
 import React from 'react';
 import boardimg from './Board.png'
 import BoardToMapButton from '../../components/IconButton.js';
+import Stickies from '../../components/Stickies.js'; // Adjust the import path as necessary
+
 import { useNavigate } from 'react-router-dom';
 
 // import '../';
@@ -24,6 +26,7 @@ function Board() {
             position: 'relative', // Needed for absolute positioning of children
         }}>
             <BoardToMapButton onClick={handleClick} label="click to find more boards near you" color="#efbbf0" />
+            
 
             <img src={boardimg} alt="Board" style={{
                 maxWidth: '80%', // Limits the image size, adjust as needed
@@ -35,6 +38,7 @@ function Board() {
                 color: 'white', // Ensures text is visible
                 fontSize: '24px', // Adjust as needed
             }}>
+                <Stickies /> {/* This renders the sticky note on the board */}
                 This is the board page
             </div>
         </div>
